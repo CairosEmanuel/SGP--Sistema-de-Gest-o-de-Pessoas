@@ -8,7 +8,7 @@
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
-    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Fira+Code:wght@400;500&family=Poppins:wght@300;400;600;700&display=swap" rel="stylesheet">
 
     <style>
         :root {
@@ -17,6 +17,7 @@
             --accent-blue: #007bff;
             --ice-gray: #f8f9fa;
             --white: #ffffff;
+            --terminal-bg: #1e1e1e;
         }
 
         body {
@@ -30,6 +31,7 @@
         .navbar {
             background-color: var(--dark-blue);
             padding: 15px 0;
+            border-bottom: 1px solid rgba(255,255,255,0.1);
         }
         .navbar-brand, .nav-link {
             color: var(--white) !important;
@@ -41,54 +43,112 @@
             padding: 100px 0;
             color: var(--white);
             border-bottom-right-radius: 100px;
+            position: relative;
         }
 
+        /* Mascote e Janela Cairos */
         .mascot-container img {
-            max-width: 350px;
-            filter: drop-shadow(10px 10px 20px rgba(0,0,0,0.3));
+            max-width: 320px;
+            filter: drop-shadow(10px 10px 20px rgba(0,0,0,0.4));
         }
 
-        /* Feature Cards */
+        .terminal-window {
+            background: var(--terminal-bg);
+            border-radius: 10px;
+            box-shadow: 0 20px 40px rgba(0,0,0,0.5);
+            overflow: hidden;
+            max-width: 280px;
+            margin-top: -50px; /* Sobrepõe levemente para um design moderno */
+            margin-left: auto;
+            margin-right: auto;
+            border: 1px solid #333;
+            z-index: 10;
+            position: relative;
+        }
+
+        .terminal-header {
+            background: #333;
+            padding: 8px 12px;
+            display: flex;
+            gap: 6px;
+        }
+
+        .dot { width: 8px; height: 8px; border-radius: 50%; }
+        .red { background: #ff5f56; }
+        .yellow { background: #ffbd2e; }
+        .green { background: #27c93f; }
+
+        .terminal-body {
+            padding: 15px;
+            color: #27c93f;
+            font-family: 'Fira Code', monospace;
+            font-size: 1rem;
+            text-align: left;
+        }
+
+        /* Animação de Digitação */
+        .typing-text {
+            display: inline-block;
+            overflow: hidden;
+            white-space: nowrap;
+            border-right: 3px solid #27c93f;
+            width: 0;
+            animation: typing 3.5s steps(6, end) infinite, blink 0.75s step-end infinite;
+            vertical-align: bottom;
+            font-weight: bold;
+        }
+
+        @keyframes typing {
+            0% { width: 0; }
+            50% { width: 100%; }
+            85% { width: 100%; }
+            100% { width: 0; }
+        }
+
+        @keyframes blink {
+            from, to { border-color: transparent; }
+            50% { border-color: #27c93f; }
+        }
+
+        /* Cards e Estilização Geral */
         .card-feature {
             border: none;
             background: var(--ice-gray);
-            padding: 30px;
-            border-radius: 20px;
-            transition: transform 0.3s ease;
+            padding: 40px 30px;
+            border-radius: 25px;
+            transition: all 0.3s ease;
             height: 100%;
         }
         .card-feature:hover {
-            transform: translateY(-10px);
-            box-shadow: 0 15px 30px rgba(0,53,102,0.1);
+            transform: translateY(-12px);
+            box-shadow: 0 20px 40px rgba(0,53,102,0.12);
+            background: var(--white);
         }
         .icon-box {
-            font-size: 40px;
+            font-size: 45px;
             color: var(--accent-blue);
-            margin-bottom: 20px;
+            margin-bottom: 25px;
         }
 
-        /* CTA Section */
-        .cta-section {
-            background-color: var(--ice-gray);
-            padding: 80px 0;
-        }
-
-        /* Footer */
+        .cta-section { background-color: var(--ice-gray); padding: 90px 0; }
+        
         footer {
             background-color: var(--dark-blue);
             color: var(--white);
-            padding: 50px 0 20px;
+            padding: 60px 0 30px;
         }
 
         .btn-primary {
             background-color: var(--accent-blue);
             border: none;
-            padding: 12px 30px;
+            padding: 14px 35px;
             font-weight: 600;
+            border-radius: 50px;
+            transition: 0.3s;
         }
-
         .btn-primary:hover {
             background-color: #0056b3;
+            transform: scale(1.05);
         }
 
         .text-blue { color: var(--accent-blue); }
@@ -98,18 +158,18 @@
 
     <nav class="navbar navbar-expand-lg sticky-top">
         <div class="container">
-            <a class="navbar-brand fw-bold" href="#">
-                <i class="fas fa-dragon me-2"></i>SGP
+            <a class="navbar-brand fw-bold fs-3" href="#">
+                <i class="fas fa-dragon me-2 text-blue"></i>SGP
             </a>
             <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
                 <span class="navbar-toggler-icon"></span>
             </button>
             <div class="collapse navbar-collapse" id="navbarNav">
                 <ul class="navbar-nav ms-auto">
-                    <li class="nav-item"><a class="nav-link" href="#inicio">Início</a></li>
-                    <li class="nav-item"><a class="nav-link" href="#sobre">Sobre</a></li>
-                    <li class="nav-item"><a class="nav-link" href="#solucoes">Soluções</a></li>
-                    <li class="nav-item"><a class="nav-link btn btn-outline-light ms-lg-3" href="#contato">Falar Conosco</a></li>
+                    <li class="nav-item"><a class="nav-link" href="#inicio">Home</a></li>
+                    <li class="nav-item"><a class="nav-link" href="#sobre">Diferenciais</a></li>
+                    <li class="nav-item"><a class="nav-link" href="#solucoes">O Sistema</a></li>
+                    <li class="nav-item"><a class="nav-link btn btn-primary ms-lg-4 px-4 shadow-sm" href="#contato">Solicitar Demo</a></li>
                 </ul>
             </div>
         </div>
@@ -119,12 +179,33 @@
         <div class="container">
             <div class="row align-items-center">
                 <div class="col-lg-6" data-aos="fade-right">
-                    <h1 class="display-3 fw-bold mb-4">Gestão de Pessoas de uma <span class="text-blue">Nova Era.</span></h1>
-                    <p class="lead mb-5">O SGP automatiza seus processos de RH com a força e solidez que sua empresa precisa para evoluir. Simples, robusto e eficiente.</p>
-                    <a href="#sobre" class="btn btn-primary btn-lg rounded-pill shadow">Conheça o SGP</a>
+                    <h1 class="display-3 fw-bold mb-4">Gestão de Pessoas que <span class="text-blue">Faz História.</span></h1>
+                    <p class="lead mb-5 opacity-75">O SGP une a solidez necessária para grandes empresas com a inteligência artificial do módulo Cairos. Evolua seu RH hoje.</p>
+                    <div class="d-flex gap-3">
+                        <a href="#sobre" class="btn btn-primary btn-lg shadow">Ver Funcionalidades</a>
+                        <a href="#" class="btn btn-outline-light btn-lg rounded-pill">Saiba Mais</a>
+                    </div>
                 </div>
-                <div class="col-lg-6 text-center mascot-container" data-aos="zoom-in" data-aos-delay="200">
-                    <img src="https://cdn-icons-png.flaticon.com/512/2314/2314433.png" alt="Mascote SGP Dinossauro" class="img-fluid">
+                
+                <div class="col-lg-6 text-center mt-5 mt-lg-0">
+                    <div class="mascot-container" data-aos="zoom-in" data-aos-delay="200">
+                        <img src="https://cdn-icons-png.flaticon.com/512/2314/2314433.png" alt="Mascote SGP Dinossauro" class="img-fluid">
+                        
+                        <div class="terminal-window" data-aos="fade-up" data-aos-delay="600">
+                            <div class="terminal-header">
+                                <div class="dot red"></div>
+                                <div class="dot yellow"></div>
+                                <div class="dot green"></div>
+                            </div>
+                            <div class="terminal-body">
+                                <span style="color: #888;">> initializing...</span><br>
+                                <span>$ engine: </span>
+                                <div class="typing-container">
+                                    <span class="typing-text">Cairos</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
                 </div>
             </div>
         </div>
@@ -133,29 +214,31 @@
     <section id="sobre" class="py-5 mt-5">
         <div class="container">
             <div class="text-center mb-5" data-aos="fade-up">
-                <h2 class="fw-bold">Por que o SGP?</h2>
-                <div class="mx-auto bg-primary" style="height: 4px; width: 60px;"></div>
+                <h2 class="fw-bold display-5">A Robustez de um Gigante</h2>
+                <p class="text-muted">Por que escolher o Sistema de Gestão de Pessoas (SGP)?</p>
+                <div class="mx-auto bg-primary" style="height: 4px; width: 50px; border-radius: 2px;"></div>
             </div>
+            
             <div class="row g-4">
                 <div class="col-md-4" data-aos="fade-up" data-aos-delay="100">
                     <div class="card-feature text-center">
-                        <div class="icon-box"><i class="fas fa-bolt"></i></div>
-                        <h4>Agilidade Extinta</h4>
-                        <p>Elimine processos manuais lentos e traga a velocidade da automação para o seu DP.</p>
+                        <div class="icon-box"><i class="fas fa-brain"></i></div>
+                        <h4>Inteligência Cairos</h4>
+                        <p>Nosso motor de IA que automatiza triagens, processamentos e previsões de turnover.</p>
                     </div>
                 </div>
                 <div class="col-md-4" data-aos="fade-up" data-aos-delay="200">
                     <div class="card-feature text-center">
-                        <div class="icon-box"><i class="fas fa-shield-alt"></i></div>
-                        <h4>Solidez Jurídica</h4>
-                        <p>Segurança total de dados e conformidade com a LGPD em cada clique.</p>
+                        <div class="icon-box"><i class="fas fa-file-invoice-dollar"></i></div>
+                        <h4>Folha Blindada</h4>
+                        <p>Cálculos precisos com conformidade total às leis trabalhistas vigentes.</p>
                     </div>
                 </div>
                 <div class="col-md-4" data-aos="fade-up" data-aos-delay="300">
                     <div class="card-feature text-center">
-                        <div class="icon-box"><i class="fas fa-chart-line"></i></div>
-                        <h4>Evolução Constante</h4>
-                        <p>Relatórios inteligentes e métricas de desempenho para uma gestão baseada em dados.</p>
+                        <div class="icon-box"><i class="fas fa-mobile-alt"></i></div>
+                        <h4>Self-Service RH</h4>
+                        <p>App exclusivo para o colaborador gerenciar férias, holerites e ponto na palma da mão.</p>
                     </div>
                 </div>
             </div>
@@ -165,26 +248,28 @@
     <section id="solucoes" class="cta-section">
         <div class="container">
             <div class="row align-items-center">
-                <div class="col-lg-6 mb-4 mb-lg-0" data-aos="fade-left">
-                    <h2 class="fw-bold">Um sistema que não fica para trás.</h2>
-                    <p>Diferente dos sistemas "pré-históricos", o SGP oferece uma interface limpa, intuitiva e totalmente integrada com as necessidades do RH moderno. Do recrutamento ao desligamento, cuidamos de tudo.</p>
-                    <ul class="list-unstyled">
-                        <li class="mb-2"><i class="fas fa-check-circle text-blue me-2"></i> Folha de Pagamento Digital</li>
-                        <li class="mb-2"><i class="fas fa-check-circle text-blue me-2"></i> Portal do Colaborador</li>
-                        <li class="mb-2"><i class="fas fa-check-circle text-blue me-2"></i> Controle de Ponto por Geolocalização</li>
-                    </ul>
+                <div class="col-lg-7" data-aos="fade-right">
+                    <h2 class="fw-bold mb-4">Pronto para extinguir a burocracia?</h2>
+                    <p class="mb-4">O SGP é a ferramenta que faltava para transformar seu RH em um braço estratégico da empresa.</p>
+                    <div class="d-flex align-items-start mb-3">
+                        <i class="fas fa-map-marker-alt text-blue mt-1 me-3 fs-4"></i>
+                        <div>
+                            <h6 class="fw-bold mb-0">Nossa Matriz:</h6>
+                            <a href="https://maps.app.goo.gl/WR95M52j26A3ActJ6" target="_blank" class="text-muted text-decoration-none">Acesse o mapa clicando aqui</a>
+                        </div>
+                    </div>
                 </div>
-                <div class="col-lg-6" data-aos="flip-up">
-                    <div class="bg-white p-4 rounded shadow">
-                        <h4 class="mb-4">Solicite uma Demonstração</h4>
+                <div class="col-lg-5" data-aos="flip-left">
+                    <div class="bg-white p-5 rounded-4 shadow-lg">
+                        <h4 class="fw-bold mb-4">Fale com um consultor</h4>
                         <form>
                             <div class="mb-3">
-                                <input type="text" class="form-control" placeholder="Seu Nome">
+                                <input type="text" class="form-control form-control-lg bg-light border-0" placeholder="Nome Completo" style="font-size: 0.9rem;">
                             </div>
                             <div class="mb-3">
-                                <input type="email" class="form-control" placeholder="E-mail Corporativo">
+                                <input type="email" class="form-control form-control-lg bg-light border-0" placeholder="E-mail Corporativo" style="font-size: 0.9rem;">
                             </div>
-                            <button class="btn btn-primary w-100">Enviar agora</button>
+                            <button class="btn btn-primary w-100 py-3 shadow">Enviar e Iniciar Evolução</button>
                         </form>
                     </div>
                 </div>
@@ -195,32 +280,31 @@
     <footer>
         <div class="container">
             <div class="row">
-                <div class="col-lg-4 mb-4">
-                    <h5 class="fw-bold mb-4">SGP - Sistema de Gestão de Pessoas</h5>
-                    <p>O poder da gestão moderna em suas mãos.</p>
-                    <div class="social-icons">
-                        <a href="#" class="text-white me-3"><i class="fab fa-linkedin fa-lg"></i></a>
-                        <a href="#" class="text-white me-3"><i class="fab fa-instagram fa-lg"></i></a>
-                        <a href="#" class="text-white"><i class="fab fa-facebook fa-lg"></i></a>
+                <div class="col-lg-5 mb-5">
+                    <h3 class="fw-bold mb-4"><i class="fas fa-dragon me-2"></i>SGP</h3>
+                    <p class="opacity-50 pe-lg-5">Liderando a transformação digital na gestão de pessoas com segurança, solidez e inovação tecnológica.</p>
+                    <div class="d-flex gap-3">
+                        <a href="#" class="text-white opacity-75"><i class="fab fa-linkedin fa-2x"></i></a>
+                        <a href="#" class="text-white opacity-75"><i class="fab fa-instagram fa-2x"></i></a>
                     </div>
                 </div>
-                <div class="col-lg-4 mb-4">
-                    <h5 class="fw-bold mb-4">Links Rápidos</h5>
-                    <ul class="list-unstyled">
-                        <li><a href="#" class="text-white text-decoration-none">Suporte</a></li>
-                        <li><a href="#" class="text-white text-decoration-none">Documentação</a></li>
-                        <li><a href="#" class="text-white text-decoration-none">Políticas de Privacidade</a></li>
+                <div class="col-lg-3 mb-4">
+                    <h5 class="fw-bold mb-4">Explorar</h5>
+                    <ul class="list-unstyled opacity-75">
+                        <li class="mb-2"><a href="#" class="text-white text-decoration-none">Funcionalidades</a></li>
+                        <li class="mb-2"><a href="#" class="text-white text-decoration-none">Segurança (LGPD)</a></li>
+                        <li class="mb-2"><a href="#" class="text-white text-decoration-none">Blog do RH</a></li>
                     </ul>
                 </div>
-                <div class="col-lg-4 mb-4">
-                    <h5 class="fw-bold mb-4">Localização</h5>
-                    <p><i class="fas fa-map-marker-alt me-2"></i> <a href="https://maps.app.goo.gl/WR95M52j26A3ActJ6" class="text-white text-decoration-none">Acesse nossa localização no Maps</a></p>
-                    <p><i class="fas fa-phone me-2"></i> (11) 4002-8922</p>
+                <div class="col-lg-4">
+                    <h5 class="fw-bold mb-4">Contato</h5>
+                    <p class="opacity-75 mb-1"><i class="fas fa-envelope me-2"></i> contato@sgp.com.br</p>
+                    <p class="opacity-75"><i class="fas fa-phone-alt me-2"></i> 0800 700 4000</p>
                 </div>
             </div>
-            <hr class="bg-light">
-            <div class="text-center pb-3">
-                <small>&copy; 2024 SGP. Todos os direitos reservados. Onde a tradição encontra o futuro.</small>
+            <hr class="my-5 opacity-25">
+            <div class="text-center opacity-50">
+                <small>© 2026 SGP - Sistema de Gestão de Pessoas. Powered by Cairos Engine.</small>
             </div>
         </div>
     </footer>
@@ -228,10 +312,11 @@
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
     <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
     <script>
-        // Inicializa as animações
+        // Inicializa as animações de scroll
         AOS.init({
             duration: 1000,
-            once: true
+            once: true,
+            offset: 100
         });
     </script>
 </body>
